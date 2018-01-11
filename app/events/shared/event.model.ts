@@ -11,10 +11,10 @@ export interface IEvent {
         country: string
     },
     onlineUrl?: string,
-    sessions: ISeesion[]
+    sessions: ISession[]
 }
 
-export interface ISeesion {
+export interface ISession {
     id: number
     name: string
     presenter: string
