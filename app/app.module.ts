@@ -24,7 +24,7 @@ import { appRoutes } from "./routes";
 import { Error404Component } from "./errors/404.component";
 import { AuthService } from "./user/auth.service";
 
-declare let toastr : Toastr
+declare let toastr: Toastr;
 
 @NgModule({
     imports: [
@@ -49,7 +49,8 @@ declare let toastr : Toastr
     providers: [
         EventService,
         { provide: TOASTR_TOKEN, useValue: toastr },
-        EventRouteActivator,
+        // { provide: EventRouteActivator, useClass: EventRouteActivator }, // long hand
+        EventRouteActivator, // short hand
         EventsListResolver,
         AuthService,
         // { provide: EventService, useValue: EventService }
