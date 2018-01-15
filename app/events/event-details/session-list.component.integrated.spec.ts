@@ -4,6 +4,9 @@ import { By } from "@angular/platform-browser";
 import { AuthService } from "../../user/auth.service";
 import { VoterService } from "./voter.service";
 import { SessionListComponnet } from "./session-list.component";
+import { UpvoteComponent } from "./upvote-component";
+import { CollapsibleWellComponent } from "../../common/collapsible-well.component";
+import { DurationPipe } from "../shared/duration.pipe";
 import { ISession } from "../shared/event.model";
 
 describe('SessionListComponent', () => {
@@ -19,7 +22,10 @@ describe('SessionListComponent', () => {
         TestBed.configureTestingModule({
             imports: [],
             declarations: [
-                SessionListComponnet
+                SessionListComponnet,
+                UpvoteComponent,
+                DurationPipe,
+                CollapsibleWellComponent
             ],
             providers: [
                 { provide: AuthService, useVaule: mockAuthService },
@@ -36,9 +42,18 @@ describe('SessionListComponent', () => {
         element = fixture.nativeElement;
     })
 
-    describe('ngOnChanges', () => {
+    describe('initial display', () => {
 
-        it('should filter the sessions correctly', () => {
+        it('should have the correct session title', () => {
+            component.sessions = [{id: 3, name: 'Session 1', presenter: 'Joe', duration: 1, level: 'beginner', abstract: 'abstract', voters: ['john', 'bob']}];
+            component.filterBy = 'all';
+            component.sortBy = 'name';
+            component.eventId = 4;
+
+            component.ngOnChanges();
+            fixture.detectChanges();
+
+            expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
         })
     })
 })
