@@ -1,29 +1,32 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable } from "rxjs/RX";
 import { IEvent, ISession } from "./event.model";
-import { Http, Response } from "@angular/http";
+import { Http, Response, Headers, Request, RequestOptions } from "@angular/http";
 
 @Injectable()
 export class EventService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) { }
 
     getEvents(): Observable<IEvent[]> {
         return this.http.get('/api/events').map((response: Response) => {
-            return <IEvent[]> response.json();
+            return <IEvent[]>response.json();
         }).catch(this.handleError);
     }
 
-    getEvent(id: number):Observable<IEvent> {
+    getEvent(id: number): Observable<IEvent> {
         return this.http.get(`/api/events/${id}`).map((response: Response) => {
-            return <IEvent> response.json();
+            return <IEvent>response.json();
         }).catch(this.handleError);
     }
 
-    saveEvent(event) {
-        event.id=  999;
-        event.session = [];
-        EVENTS.push(event);
+    saveEvent(event): Observable<IEvent> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post('/api/events', JSON.stringify(event), options).map((response: Response) => {
+            return response.json();
+        }).catch(this.handleError);
     }
 
     updateEvent(event) {
@@ -37,7 +40,7 @@ export class EventService {
 
         EVENTS.forEach(event => {
             var matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
-            matchingSessions = matchingSessions.map((session:any) => {
+            matchingSessions = matchingSessions.map((session: any) => {
                 session.eventId = event.id;
                 return session;
             });
@@ -56,7 +59,7 @@ export class EventService {
     }
 }
 
-const EVENTS:IEvent[] = [
+const EVENTS: IEvent[] = [
     {
         id: 1,
         name: 'Angular Connect',
