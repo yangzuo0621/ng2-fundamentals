@@ -1,11 +1,11 @@
 import { TestBed, async, ComponentFixture } from "@angular/core/testing";
-import { DebugElement } from "@angular/core";
+import { DebugElement, Component, NO_ERRORS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { AuthService } from "../../user/auth.service";
 import { VoterService } from "./voter.service";
 import { SessionListComponnet } from "./session-list.component";
-import { UpvoteComponent } from "./upvote-component";
-import { CollapsibleWellComponent } from "../../common/collapsible-well.component";
+// import { UpvoteComponent } from "./upvote-component";
+// import { CollapsibleWellComponent } from "../../common/collapsible-well.component";
 import { DurationPipe } from "../shared/duration.pipe";
 import { ISession } from "../shared/event.model";
 
@@ -28,15 +28,17 @@ describe('SessionListComponent', () => {
             imports: [],
             declarations: [
                 SessionListComponnet,
-                UpvoteComponent,
+                // UpvoteComponent,
                 DurationPipe,
-                CollapsibleWellComponent
+                // CollapsibleWellComponent
             ],
             providers: [
                 { provide: AuthService, useValue: mockAuthService },
                 { provide: VoterService, useValue: mockVoterService }
             ],
-            schemas: []
+            schemas: [
+                NO_ERRORS_SCHEMA
+            ]
         }).compileComponents();
     }))
 
