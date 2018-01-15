@@ -11,7 +11,7 @@ export class LocationValidator implements Validator {
 
     validate(fromGroup: FormGroup): { [key: string]: any } {
         let addressControl = fromGroup.controls['address'];
-        let cityControl = fromGroup.controls['ciry'];
+        let cityControl = fromGroup.controls['city'];
         let countryControl = fromGroup.controls['country'];
         let onlineUrlControl = (<FormGroup>fromGroup.root).controls['onlineUrl'];
 
