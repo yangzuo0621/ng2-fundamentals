@@ -14,7 +14,8 @@ import {
     CreateSessionComponent,
     SessionListComponnet,
     DurationPipe,
-    UpvoteComponent
+    UpvoteComponent,
+    VoterService
 } from './events/index';
 
 import { EventsAppComponent } from "./events-app.component";
@@ -65,6 +66,7 @@ declare let jQuery : Object;
         EventRouteActivator, // short hand
         EventsListResolver,
         AuthService,
+        VoterService,
         // { provide: EventService, useValue: EventService }
         {
             provide: 'canDeactivateCreateEvent',
